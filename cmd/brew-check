@@ -1,0 +1,4 @@
+#!/bin/bash
+brew update
+echo -e "\033[0;35m==> \033[1;32mOutdated \033[0m"
+brew outdated

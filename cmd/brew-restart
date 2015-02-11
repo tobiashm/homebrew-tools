@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+brew services list | \
+  sed -e 's/.*homebrew\.mxcl\.//' -e 's/\.plist//' | \
+  awk '{ system("brew services restart " $1) }'
