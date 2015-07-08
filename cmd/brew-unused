@@ -1,4 +1,2 @@
 #!/bin/bash
-deps=$(brew leaves | xargs -n 1 brew deps | sort | uniq)
-non_deps=$(comm -23 <(brew list) <(echo "$deps"))
-comm -13 <(brew leaves) <(echo "$non_deps")
+comm -13 <(brew list) <(comm -23 <(brew list) <(brew leaves) | xargs -n 1 brew uses --installed --recursive | sort | uniq)
