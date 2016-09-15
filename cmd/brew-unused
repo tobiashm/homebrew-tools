@@ -1,2 +1,6 @@
 #!/bin/bash
-comm -13 <(brew list) <(comm -23 <(brew list) <(brew leaves) | xargs -n 1 brew uses --installed --recursive | sort | uniq)
+IFS=$'\n'
+leaves=$(brew leaves)
+deps=$(brew deps --union --installed --include-build --full-name ${leaves})
+in_use=("${leaves[@]}" "${deps[@]}")
+comm -23 <(brew list --full-name | sort) <(sort <<<"${in_use[*]}")
